@@ -34,7 +34,7 @@ public class DIYArrayList<T> implements List<T> {
     @Override
     public T set(int index, T element) {
         if (index >= size() || index < 0) {
-            throw new ArrayIndexOutOfBoundsException();
+            throw new ArrayIndexOutOfBoundsException(index);
         }
         T oldElement = (T) array[index];
         array[index] = element;
@@ -78,7 +78,7 @@ public class DIYArrayList<T> implements List<T> {
         return result;
     }
 
-    private class innerIterator implements Iterator<T> {
+    private class InnerIterator implements Iterator<T> {
         int lastReturned = -1;
         int cursor;
         @Override
@@ -99,7 +99,7 @@ public class DIYArrayList<T> implements List<T> {
         return new innerListIterator();
     }
 
-    private class innerListIterator extends innerIterator implements ListIterator<T> {
+    private class InnerListIterator extends innerIterator implements ListIterator<T> {
 
         @Override
         public boolean hasPrevious() {
@@ -136,7 +136,7 @@ public class DIYArrayList<T> implements List<T> {
 
         @Override
         public void add(T t) {
-
+throw new UnsupportedOperationException();
         }
 
 
