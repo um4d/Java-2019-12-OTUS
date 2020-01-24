@@ -60,7 +60,7 @@ public class DIYArrayList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new innerIterator();
+        return new InnerIterator();
     }
 
     @Override
@@ -96,10 +96,10 @@ public class DIYArrayList<T> implements List<T> {
 
     @Override
     public ListIterator<T> listIterator() {
-        return new innerListIterator();
+        return new InnerListIterator();
     }
 
-    private class InnerListIterator extends innerIterator implements ListIterator<T> {
+    private class InnerListIterator extends InnerIterator implements ListIterator<T> {
 
         @Override
         public boolean hasPrevious() {
@@ -136,7 +136,7 @@ public class DIYArrayList<T> implements List<T> {
 
         @Override
         public void add(T t) {
-throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException();
         }
 
 
@@ -149,17 +149,6 @@ throw new UnsupportedOperationException();
     @Override
     public Object[] toArray() {
         return Arrays.copyOf(array, size);
-    }
-
-    @Override
-    public void replaceAll(UnaryOperator<T> operator) {
-        throw new UnsupportedOperationException();
-    }
-
-
-    @Override
-    public Spliterator<T> spliterator() {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -200,8 +189,12 @@ throw new UnsupportedOperationException();
 
     @Override
     public String toString() {
-        return "DIYArrayList{" + "array=" + Arrays.toString(array) + ", DEFAULT_CAPACITY=" + DEFAULT_CAPACITY + ", " +
-                "size=" + size + '}';
+        StringBuilder result = new StringBuilder("");
+        for (int i = 0; i < size(); i++){
+            result.append(array[i].toString()).append(", ");
+        }
+        if (size() > 0) result.delete(result.length() - 2, result.length());
+        return String.format("[%s]", result);
     }
 
     @Override
