@@ -63,6 +63,21 @@ public class DIYArrayList<T> implements List<T> {
         return new innerIterator();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DIYArrayList<?> that = (DIYArrayList<?>) o;
+        return size == that.size && Arrays.equals(array, that.array);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(size);
+        result = 31 * result + Arrays.hashCode(array);
+        return result;
+    }
+
     private class innerIterator implements Iterator<T> {
         int lastReturned = -1;
         int cursor;
