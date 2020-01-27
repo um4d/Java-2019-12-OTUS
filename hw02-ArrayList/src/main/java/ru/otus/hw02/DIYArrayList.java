@@ -240,7 +240,15 @@ public class DIYArrayList<T> implements List<T> {
 
     @Override
     public int indexOf(Object o) {
+        if (o == null) {
+            for (int i = 0; i < size(); i++ ) {
+                if (array[i] == null) {
+                    return i;
+                }
+            }
+        }
         for(int i = 0; i < size(); i++ ) {
+            if (array[i] == null) continue;
             if (array[i].equals(o)) return i;
         }
         return -1;
