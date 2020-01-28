@@ -246,10 +246,11 @@ public class DIYArrayList<T> implements List<T> {
                     return i;
                 }
             }
-        }
-        for(int i = 0; i < size(); i++ ) {
-            if (array[i] == null) continue;
-            if (array[i].equals(o)) return i;
+        } else {
+            for(int i = 0; i < size(); i++ ) {
+                if (array[i] == null) continue;
+                if (array[i].equals(o)) return i;
+            }
         }
         return -1;
     }
