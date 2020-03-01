@@ -3,12 +3,12 @@ package ru.otus.hw05;
 import ru.otus.hw05.annotations.After;
 import ru.otus.hw05.annotations.Before;
 import ru.otus.hw05.annotations.Test;
-import ru.otus.hw05.tests.PersonTests;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class TestCore {
@@ -66,13 +66,15 @@ public class TestCore {
 
         for (Method m : testMethods) {
             String methodName = m.getName();
+            String description = m.getDeclaredAnnotation(Test.class).value();
             try {
-                testClazz.getMethod(methodName).getDeclaredAnnotation(Test.class);
                 testClazz.getMethod(methodName).invoke(testClass);
-                System.out.println(String.format("Test name: %s\n" + ANSI_GREEN + "PASS\n" + ANSI_RESET, methodName));
+                System.out.println(String.format("Test name: %s\n" + "Description: %s\n" + ANSI_GREEN + "PASS\n" + ANSI_RESET,
+                        methodName, description));
                 pass++;
             } catch (Throwable e) {
-                System.out.println(String.format("Test name: %s\n" + ANSI_RED + "FAIL" + ANSI_RESET, methodName));
+                System.out.println(String.format("Test name: %s\n" + "Description: %s\n" + ANSI_RED + "FAIL" + ANSI_RESET,
+                        methodName,description));
                 System.out.println(e.getCause() + "\n");
                 fail++;
             }

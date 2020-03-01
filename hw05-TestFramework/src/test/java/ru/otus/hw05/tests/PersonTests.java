@@ -22,12 +22,20 @@ public class PersonTests {
         assertThat(nickName).isEqualTo("joker2005");
     }
 
+    @Test("проверка генерации никнейма на основе имени и возраста после изменения имени")
+        public void generateNickNameAfterNameChanging() {
+            person.setName("batman");
+            String nickName = person.generateNickName();
+            assertThat(nickName).isEqualTo("joker2005");
+        }
+
     @Test("проверка генерации никнейма на основе имени и возраста после изменения возраста")
     public void generateNickNameAfterAgeChanging() {
         person.setAge(21);
         String nickName = person.generateNickName();
-        assertThat(nickName).isEqualTo("joker1999");
+        assertThat(nickName).isEqualTo("batman1999");
     }
+
 
     @After
     public void finish() {}
