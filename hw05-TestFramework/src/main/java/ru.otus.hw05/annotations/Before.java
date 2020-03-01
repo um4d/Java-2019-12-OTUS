@@ -8,6 +8,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Retention(RUNTIME)
 @Target(METHOD)
-public @interface Test {
-    String value() default "No description";
+public @interface Before {
 }
